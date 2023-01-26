@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Realtime module &mdash; NIOSH NCSU Project 2022  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VisualizeRecorded module" href="VisualizeRecorded.html" />
+    <link rel="prev" title="Qr Code Recognition" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> NIOSH NCSU Project 2022
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Qr Code Recognition</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Realtime module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#realtime-py">Realtime.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Realtime.CamThread"><code class="docutils literal notranslate"><span class="pre">CamThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Realtime.CamThread.capFrame"><code class="docutils literal notranslate"><span class="pre">CamThread.capFrame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Realtime.CamThread.run"><code class="docutils literal notranslate"><span class="pre">CamThread.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Realtime.PathGenThread"><code class="docutils literal notranslate"><span class="pre">PathGenThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Realtime.PathGenThread.run"><code class="docutils literal notranslate"><span class="pre">PathGenThread.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Realtime.VisThread"><code class="docutils literal notranslate"><span class="pre">VisThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Realtime.VisThread.run"><code class="docutils literal notranslate"><span class="pre">VisThread.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Realtime.getDistance"><code class="docutils literal notranslate"><span class="pre">getDistance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Realtime.readCalFromFile"><code class="docutils literal notranslate"><span class="pre">readCalFromFile()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VisualizeRecorded.html">VisualizeRecorded module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calibrate.html">calibrate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recognize.html">recognize module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NIOSH NCSU Project 2022</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Qr Code Recognition</a></li>
+      <li class="breadcrumb-item active">Realtime module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Realtime.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Realtime">
+<span id="realtime-module"></span><h1>Realtime module<a class="headerlink" href="#module-Realtime" title="Permalink to this heading"></a></h1>
+<section id="realtime-py">
+<h2>Realtime.py<a class="headerlink" href="#realtime-py" title="Permalink to this heading"></a></h2>
+<p>Runs full system integration in real time</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="Realtime.CamThread">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Realtime.</span></span><span class="sig-name descname"><span class="pre">CamThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camNo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.CamThread" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<p>Class for creating a camera thread for capturing localization data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>threading.Thread</strong> – thread class from python threading library to use for creating thread</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Realtime.CamThread.capFrame">
+<span class="sig-name descname"><span class="pre">capFrame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.CamThread.capFrame" title="Permalink to this definition"></a></dt>
+<dd><p>Captures frames and attempts to get distance from these images</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>self</strong> – The reference to this class instance itself</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return distance generated from capturing frames</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Realtime.CamThread.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.CamThread.run" title="Permalink to this definition"></a></dt>
+<dd><p>Routine to run after initalization of the thread.</p>
+<p>This routine waits for resources to become available and when they are the thread then:</p>
+<ol class="arabic simple">
+<li><p>Changes the flag to the correct value for program operation</p></li>
+<li><p>Captures frames to get distance</p></li>
+<li><p>Appends data to the temporary data structure</p></li>
+<li><dl class="simple">
+<dt>Looks to see if the theres enough distance data for coordinate</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>If so:</dt><dd><ol class="arabic simple">
+<li><p>Append coordinate to path data structure</p></li>
+<li><p>Clear Temporary data structure</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Otherwise:</dt><dd><ol class="arabic simple">
+<li><p>Pass on the data to the next capture thread to get more location data for a full coordinate</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>self</strong> – The reference to this class instance itself</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Realtime.PathGenThread">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Realtime.</span></span><span class="sig-name descname"><span class="pre">PathGenThread</span></span><a class="headerlink" href="#Realtime.PathGenThread" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<p>Class for creating a path generation thread</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>threading.Thread</strong> – thread class from python threading library to use for creating thread</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Realtime.PathGenThread.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.PathGenThread.run" title="Permalink to this definition"></a></dt>
+<dd><p>Generates path given coordinate data.</p>
+<p>This thread Aims to generate and extend a path of translations for the robot for which the visualizer by doing the following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><dl class="simple">
+<dt>See if theres a coordinate available to be made into a translation</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Assuming a coordinate is available:</dt><dd><ol class="arabic simple">
+<li><p>Figure out the change from the last coordinate and convert this change from real life units to rendered units using conversion factor</p></li>
+<li><p>Set the last coordinate to be current coordinate</p></li>
+<li><p>Artifically extend path into number of sub points based on speed factor set by user</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Otherwise: don’t do anything</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>self</strong> – The reference to this class instance itself</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Realtime.VisThread">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Realtime.</span></span><span class="sig-name descname"><span class="pre">VisThread</span></span><a class="headerlink" href="#Realtime.VisThread" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<p>Class for creating a visualization thread to manipulate position of robot in visualization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>threading.Thread</strong> – thread class from python threading library to use for creating thread</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Realtime.VisThread.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.VisThread.run" title="Permalink to this definition"></a></dt>
+<dd><p>Manipulates visualizer data to show translation of robot.</p>
+<p>Works with main thread to get all translations rendered by:</p>
+<ol class="arabic">
+<li><p>Checking if path has translations that can be rendered</p>
+<blockquote>
+<div><p><strong>Assuming there translations to be rendered, while there is tranlations to be rendered:</strong></p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Assuming the variable changed is false (meaning the visualizer is rendered up to date) render a translation to the mesh</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Note: this does not update the visualizer, it just changes the mesh objects state</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Change the state of changed to true</p></li>
+<li><p>Main thread sees that the chaned variable has changed and updates visualizer by rerendering with updated geometry</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Note:  this must be done in main thread because of how Open3D works</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Main thread changes changed variable to false restarting the cycle to sub-step 1</p></li>
+</ol>
+</div></blockquote>
+<p><strong>Otherwise: do nothing</strong></p>
+</div></blockquote>
+</li>
+<li><p>Reset flag value to restart realtime process</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>self</strong> – The reference to this class instance itself git</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Realtime.getDistance">
+<span class="sig-prename descclassname"><span class="pre">Realtime.</span></span><span class="sig-name descname"><span class="pre">getDistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sideLen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focalLen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">camWidth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.getDistance" title="Permalink to this definition"></a></dt>
+<dd><p>Gets distance to a code given the required knowns in the system of real side length, calibrated focal length of the camera, and the width of the code in the viewfinder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sideLen</strong> – Real world size of qr code in inches (from one edge of code to the other)</p></li>
+<li><p><strong>focalLen</strong> – Calibrated focal length of the camera (unit is pixels)</p></li>
+<li><p><strong>camWidth</strong> – Width of the Qr code in the viewfinder in pixels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the distance to a QR code in inches</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Realtime.readCalFromFile">
+<span class="sig-prename descclassname"><span class="pre">Realtime.</span></span><span class="sig-name descname"><span class="pre">readCalFromFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Realtime.readCalFromFile" title="Permalink to this definition"></a></dt>
+<dd><p>Reads calibration data from a given file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fileName</strong> – Name of file to read coord data from</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns data read from calibration file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="Qr Code Recognition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="VisualizeRecorded.html" class="btn btn-neutral float-right" title="VisualizeRecorded module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Brian Tierney.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
